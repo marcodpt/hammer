@@ -1,3 +1,5 @@
+import hammer from '../index.js'
+
 const MAX_LENGTH = 60
 
 const sanitize = (unsafe, quoted) => {

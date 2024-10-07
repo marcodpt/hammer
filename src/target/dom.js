@@ -15,7 +15,9 @@ export default hammer((tagName, attributes, children) => {
     }
   })
 
-  (children || []).forEach(child => e.appendChild(child))
+  if (children) {
+    children.forEach(child => e.appendChild(child))
+  }
 
   return e
 }, text => document.createTextNode(text))
