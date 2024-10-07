@@ -1,7 +1,7 @@
 import {dom} from "../index.js"
 
 document.body.appendChild(dom(({
-  main, h1, img, span, text, button
+  main, h1, img, span, button, text
 }) => 
   main({}, [
     h1({}, [
