@@ -5,7 +5,7 @@ const camelToKebab = string => string
   .replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2')
   .toLowerCase()
 
-const resolveAttrs = attributes => Object.keys(attributes || {})
+const resolveAttrs = attributes => Object.keys(attributes)
   .reduce((A, key) => {
     let v = attributes[key]
     const k = camelToKebab(key)
@@ -64,7 +64,9 @@ const resolveChildren = children =>
 export default (h, text) => {
   const Tags = {}
   Tags.h = (tagName, attributes, children) => h(tagName,
-    resolveAttrs(attributes),
+    attributes &&
+    typeof attributes == 'object' &&
+    !(attributes instanceof Array) ? resolveAttrs(attributes) : {},
     children ? resolveChildren(children) : children
   )
   Tags.text = str => text(

@@ -20,6 +20,10 @@ QUnit.test("dom", assert => {
     text
   }) => {
     assert.equal(a().outerHTML, '<a></a>')
+    assert.equal(input().outerHTML, '<input>')
+    assert.equal(a([
+      "x"
+    ]).outerHTML, '<a></a>')
     assert.equal(a({
       href: 'www.testme.com'
     }).outerHTML, '<a href="www.testme.com"></a>')
@@ -383,25 +387,41 @@ QUnit.test("dom", assert => {
     assert.equal(window.TEST_CLICK, null)
     const e = button({
       type: 'button',
-      click: () => {window.TEST_CLICK = 1}
+      click: (e, index) => {
+        e.textContent = 'call e'+index
+        window.TEST_CLICK = 1
+      }
     }, [
       text('Test me!')
     ])
     const f = button({
       type: 'button',
-      onclick: () => {window.TEST_CLICK++}
+      onclick: ev => {
+        ev.target.textContent = 'call F'
+        window.TEST_CLICK++
+      }
     }, [
       text('Test me again!')
     ])
     assert.equal(e.outerHTML, '<button type="button">Test me!</button>')
     assert.equal(f.outerHTML, '<button type="button">Test me again!</button>')
-    e.click()
+    assert.equal(e.textContent, 'Test me!')
+    assert.equal(f.textContent, 'Test me again!')
+    e.click(1)
+    assert.equal(e.textContent, 'call e1')
+    assert.equal(f.textContent, 'Test me again!')
     assert.equal(window.TEST_CLICK, 1)
     f.click()
+    assert.equal(e.textContent, 'call e1')
+    assert.equal(f.textContent, 'call F')
     assert.equal(window.TEST_CLICK, 2)
     f.click()
+    assert.equal(e.textContent, 'call e1')
+    assert.equal(f.textContent, 'call F')
     assert.equal(window.TEST_CLICK, 3)
-    e.click()
+    e.click(2)
+    assert.equal(e.textContent, 'call e2')
+    assert.equal(f.textContent, 'call F')
     assert.equal(window.TEST_CLICK, 1)
 
     assert.equal(div({}, [
