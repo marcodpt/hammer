@@ -39,15 +39,6 @@ QUnit.test("template", assert => {
     }, [
       text("<span>")
     ]), '<a href="www.testme.com">&lt;span&gt;</a>')
-    assert.equal(button({
-      click: () => {console.log('hello')}
-    }, [
-      text('Inline JS!')
-    ]), [
-      '<button',
-      '  click="javascript:() =&gt; {console.log(&#039;hello&#039;)}"',
-      '>Inline JS!</button>'
-    ].join('\n'))
     assert.equal(a({
       href: 'www.testme.com'
     }, [

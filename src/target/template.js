@@ -3,10 +3,6 @@ import hammer from '../index.js'
 const MAX_LENGTH = 60
 
 const sanitize = (unsafe, quoted) => {
-  if (typeof unsafe == 'function') {
-    unsafe = (quoted ? 'javascript:' : '')+unsafe.toString()
-  }
-
   unsafe = unsafe
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
