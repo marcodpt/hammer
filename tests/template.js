@@ -1,7 +1,7 @@
-import {template as html} from '../index.js'
+import {template} from '../index.js'
 
 QUnit.test("template", assert => {
-  html(({
+  template(({
     a,
     div,
     span,

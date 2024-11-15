@@ -1,4 +1,4 @@
-import {dom as html} from '../index.js'
+import {dom} from '../index.js'
 
 const render = X => X.map(x => {
   let r = x.trim()
@@ -7,7 +7,7 @@ const render = X => X.map(x => {
 }).join("")
 
 QUnit.test("dom", assert => {
-  html(({
+  dom(({
     a,
     div,
     form,
