@@ -78,7 +78,9 @@ export default (h, text) => {
     Tags[tag] = attributes => Tags.h(tag, attributes)
   })
   normalTags.forEach(tag => {
-    Tags[tag] = (attributes, children) => Tags.h(tag, attributes, children)
+    Tags[tag] = (attributes, children) => Tags.h(tag, attributes,
+      children instanceof Array ? children : []
+    )
   })
 
   return node => node(Tags)
