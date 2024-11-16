@@ -6,28 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
-    <title>Template engine - Hammer</title>
+    <title>Debug - Hammer</title>
   </head>
   <body>
     <h1>
       <img src="../favicon.ico">
-      To do list (text based!)
+      To do list (Debug mode!)
     </h1>
     <input type="text">
-    <ul></ul>
+    <pre><code></code></pre>
     <button onclick="addTodo(this)">
       New!
     </button>
     <script type="module">
-      import {template} from "../index.js"
+      import {debug} from "../index.js"
 
       window.addTodo = btn => {
         const input = document.body.querySelector('input')
+        const code = document.body.querySelector('code')
 
-        document.body.querySelector('ul')
-          .innerHTML += template(({li, text}) => li({}, [
+        code.textContent += (code.textContent ? '\n\n' : '')+
+          JSON.stringify(debug(({li, text}) => li({}, [
             text(input.value)
-          ]))
+          ])), undefined, 2)
         input.value = ""
       }
     </script>
