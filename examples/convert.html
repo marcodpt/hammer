@@ -13,7 +13,7 @@
       <img src="../favicon.ico">
       Convert HTML to Hyperscript
     </h1>
-    <fieldset id="input">
+    <div id="input">
       <pre><code
 >Only one HTML element is supported.
 If more than one is entered, only the first one will be returned.</code></pre>
@@ -26,8 +26,8 @@ If more than one is entered, only the first one will be returned.</code></pre>
       <button type="button" onclick="convert()">
         Convert!
       </button>
-    </fieldset>
-    <fieldset id="output" style="display:none;">
+    </div>
+    <div id="output" style="display:none;">
       <button type="button" onclick="copy()">
         Copy
       </button>
@@ -41,7 +41,7 @@ If more than one is entered, only the first one will be returned.</code></pre>
       <button type="button" onclick="again()">
         Again
       </button>
-    </fieldset>
+    </div>
     <script type="module" src="convert.js"></script>
   </body>
 </html>
