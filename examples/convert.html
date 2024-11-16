@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <title>Convert - Hammer</title>
+  </head>
+  <body>
+    <h1>
+      <img src="../favicon.ico">
+      Convert HTML to Hyperscript
+    </h1>
+    <fieldset id="input">
+      <pre><code
+>Only one HTML element is supported.
+If more than one is entered, only the first one will be returned.</code></pre>
+      <textarea placeholder="enter HTML string..." rows="10"></textarea>
+      <input type="checkbox" checked>
+      <label
+        title="Whether the html should be parsed as a template or as a full page."
+      >Is Template?</label>
+      <br>
+      <button type="button" onclick="convert()">
+        Convert!
+      </button>
+    </fieldset>
+    <fieldset id="output" style="display:none;">
+      <button type="button" onclick="copy()">
+        Copy
+      </button>
+      <button type="button" onclick="again()">
+        Again
+      </button>
+      <pre><code></code></pre>
+      <button type="button" onclick="copy()">
+        Copy
+      </button>
+      <button type="button" onclick="again()">
+        Again
+      </button>
+    </fieldset>
+    <script type="module" src="convert.js"></script>
+  </body>
+</html>
