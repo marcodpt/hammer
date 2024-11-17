@@ -14,16 +14,36 @@
       Convert HTML to Hyperscript
     </h1>
     <div id="input">
-      <pre><code
->Only one HTML element is supported.
-If more than one is entered, only the first one will be returned.</code></pre>
-      <textarea placeholder="enter HTML string..." rows="10"></textarea>
+      <input
+        type="text"
+        name="hyperscript"
+        placeholder="h"
+        title="Hyperscript function name or leave blank to use tags."
+      >
+      <input
+        type="text"
+        name="text"
+        value="text"
+        title="Name of the function to be called in the case of text node."
+      >
+      <textarea
+        title=
+"Only one HTML element is supported.
+If more than one is entered, only the first one will be returned."
+        placeholder="Enter HTML string..."
+        rows="10"
+        required
+      ></textarea>
       <input type="checkbox" checked>
       <label
         title="Whether the html should be parsed as a template or as a full page."
       >Is Template?</label>
       <br>
-      <button type="button" onclick="convert()">
+      <button
+        type="button"
+        title="Generate hyperscript!"
+        onclick="convert()"
+      >
         Convert!
       </button>
     </div>

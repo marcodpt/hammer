@@ -24,14 +24,14 @@ const print = (x, ident) => {
   )
 }
 
-const htmlToJs = (Tags, element, ident) => {
+const htmlToJs = (h, text, Tags, element, ident) => {
   ident = ident || ''
 
   if (element.nodeType === 3 && element.textContent.trim()) {
-    if (Tags.indexOf('text') < 0) {
-      Tags.push('text')
+    if (Tags.indexOf(text) < 0) {
+      Tags.push(text)
     }
-    return `${ident}text('${element.textContent.replaceAll('\n', '\\n')}')`
+    return `${ident}${text}('${element.textContent.replaceAll('\n', '\\n')}')`
   } else if (element.nodeType !== 1) {
     return ''
   }
@@ -76,7 +76,7 @@ const htmlToJs = (Tags, element, ident) => {
   const next = ident+'  '
   const C = Array.from(
     (tag == 'template' ? element.content : element).childNodes
-  ).map(child => htmlToJs(Tags, child, next)).filter(c => c)
+  ).map(child => htmlToJs(h, text, Tags, child, next)).filter(c => c)
   const children = !C.length ? '' :
     `[\n${C.join(',\n')}\n${ident}]`
 
@@ -84,12 +84,11 @@ const htmlToJs = (Tags, element, ident) => {
   const c = C.length
   const n = next.length
 
-  return ident+tag+(
-    !a && !c ? '()' : 
-    !a ? `({}, ${children})` :
-    !c ? `(${attrs})` : 
-      `(${attrs}, ${children})`
-  )
+  return ident+(h || tag)+'('+[
+    h ? `'${tag}'` : '',
+    !a && c ? '{}' : attrs,
+    children
+  ].filter(v => v).join(', ')+')'
 } 
 
 const input = document.getElementById('input')
@@ -97,6 +96,13 @@ const output = document.getElementById('output')
 
 window.convert = () => {
   const html = document.body.querySelector('textarea').value
+  if (!html) {
+    window.alert('Fill the text area with HTML.')
+    return
+  }
+
+  const h = document.body.querySelector('input[name="hyperscript"]').value
+  const text = document.body.querySelector('input[name="text"]').value
   const isTemplate = document.body
     .querySelector('input[type="checkbox"]').checked
 
@@ -110,12 +116,12 @@ window.convert = () => {
   }
 
   const Tags = []
-  const jsCode = htmlToJs(Tags,
+  const jsCode = htmlToJs(h, text || h || 'text', Tags,
     target.firstElementChild || target.firstChild, '  '
   )
-  const fn = `html(({\n  ${Tags.join(',\n  ')}\n}) => \n${jsCode}\n)`
   input.setAttribute('style', 'display:none')
-  output.querySelector('code').textContent = fn
+  output.querySelector('code').textContent = h ? jsCode : 
+    `html(({\n  ${Tags.join(',\n  ')}\n}) => \n${jsCode}\n)`
   output.setAttribute('style', '')
 }
 
