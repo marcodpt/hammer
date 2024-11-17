@@ -6,26 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
-    <title>Convert - Hammer</title>
+    <title>Formatter - Hammer</title>
   </head>
   <body>
     <h1>
       <img src="../favicon.ico">
-      Convert HTML to Hyperscript
+      Format HTML
     </h1>
     <div id="input">
-      <input
-        type="text"
-        name="hyperscript"
-        placeholder="h"
-        title="Hyperscript function name or leave blank to use tags."
-      >
-      <input
-        type="text"
-        name="text"
-        value="text"
-        title="Name of the function to be called in the case of text node."
-      >
       <textarea
         title=
 "Only one HTML element is supported.
@@ -40,10 +28,10 @@ If more than one is entered, only the first one will be returned."
       <br>
       <button
         type="button"
-        title="Generate hyperscript!"
-        onclick="convert()"
+        title="Format HTML!"
+        onclick="format()"
       >
-        Convert!
+        Format!
       </button>
     </div>
     <div id="output" style="display:none;">
@@ -61,6 +49,6 @@ If more than one is entered, only the first one will be returned."
         Again
       </button>
     </div>
-    <script type="module" src="convert.js"></script>
+    <script type="module" src="format.js"></script>
   </body>
 </html>
