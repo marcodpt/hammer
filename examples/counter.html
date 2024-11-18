@@ -14,9 +14,9 @@
       Counter: <span>0</span>
     </h1>
     <script type="module">
-      import {dom} from "../index.js"
+      import {node} from "../index.js"
 
-      document.body.appendChild(dom(({button, text}) =>
+      document.body.appendChild(node(({button, text}) =>
         button({
           onclick: ev => {
             const el = document.body.querySelector('span')
@@ -27,7 +27,7 @@
         ])
       ))
 
-      document.body.appendChild(dom(({button, text}) =>
+      document.body.appendChild(node(({button, text}) =>
         button({
           onclick: ev => {
             const el = document.body.querySelector('span')

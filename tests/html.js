@@ -1,58 +1,66 @@
-import {dom} from '../index.js'
+import {html} from '../index.js'
 
-const render = X => X.map(x => {
-  let r = x.trim()
-  let c = r.substr(0, 1)
-  return (c != '<' && c != '>' ? ' ' : '')+r
-}).join("")
-
-QUnit.test("dom", assert => {
-  dom(({
+QUnit.test("html", assert => {
+  html(({
     a,
     div,
+    span,
     form,
     label,
     input,
     select,
     option,
     button,
-    span,
     text
   }) => {
-    assert.equal(a().outerHTML, '<a></a>')
-    assert.equal(input().outerHTML, '<input>')
+    assert.equal(a(), '<a></a>')
+    assert.equal(input(), '<input>')
     assert.equal(a([
       "x"
-    ]).outerHTML, '<a></a>')
+    ]), '<a></a>')
     assert.equal(a({
       href: 'www.testme.com'
-    }).outerHTML, '<a href="www.testme.com"></a>')
-    assert.equal(a({
-      href: 'www.testme.com'
-    }).outerHTML, '<a href="www.testme.com"></a>')
+    }), '<a href="www.testme.com"></a>')
+    assert.equal(input({
+      value: 'www.testme.com'
+    }), '<input value="www.testme.com">')
     assert.equal(a({
       href: 'www.testme.com'
     }, [
       text("hello")
-    ]).outerHTML, '<a href="www.testme.com">hello</a>')
+    ]), '<a href="www.testme.com">hello</a>')
+    assert.equal(input({
+      value: 'www.testme.com'
+    }, [
+      text("hello")
+    ]), '<input value="www.testme.com">')
     assert.equal(a({
       href: 'www.testme.com'
     }, [
       text("<span>")
-    ]).outerHTML, '<a href="www.testme.com">&lt;span&gt;</a>')
+    ]), '<a href="www.testme.com">&lt;span&gt;</a>')
     assert.equal(a({
-      href: 'www.testme.com',
+      href: 'www.testme.com'
+    }, [
+      "<br>"
+    ]), [
+      '<a href="www.testme.com">',
+      '  <br>',
+      '</a>'
+    ].join('\n'))
+    assert.equal(a({
+      href: 'https://www.testme.com?q=test',
       style: {
         whiteSpace: 'pre-wrap'
       }
     }, [
       text("<span>")
-    ]).outerHTML, render([
+    ]), [
       '<a',
-      '  href="www.testme.com"',
+      '  href="https://www.testme.com?q=test"',
       '  style="white-space: pre-wrap"',
       '>&lt;span&gt;</a>',
-    ]))
+    ].join("\n"))
     assert.equal(a({
       href: 'www.testme.com',
       style: {
@@ -75,7 +83,7 @@ QUnit.test("dom", assert => {
       king: ''
     }, [
       text("<span>")
-    ]).outerHTML, render([
+    ]), [
       '<a',
       '  href="www.testme.com"',
       '  style="white-space: pre-wrap; width: 0"',
@@ -83,39 +91,42 @@ QUnit.test("dom", assert => {
       '  data-bind="3.14"',
       '  king=""',
       '>&lt;span&gt;</a>'
-    ]))
+    ].join("\n"))
     assert.equal(div({}, [
       a({
-        href: 'www.testme.com',
+        href: 'https://www.testme.com?q=test',
         style: {
           whiteSpace: 'pre-wrap'
         }
-      }, [null, null])
-    ]).outerHTML, render([
+      }, [
+        null,
+        null
+      ])
+    ]), [
       '<div>',
       '  <a',
-      '    href="www.testme.com"',
+      '    href="https://www.testme.com?q=test"',
       '    style="white-space: pre-wrap"',
       '  ></a>',
       '</div>'
-    ]))
+    ].join("\n"))
     assert.equal(div({}, [
       a({
-        href: 'www.testme.com',
+        href: 'https://www.testme.com?q=test',
         style: {
           whiteSpace: 'pre-wrap'
         }
       }, [
         text("White Space\nShould not ident\nIn case of user data")
       ])
-    ]).outerHTML, render([
+    ]), [
       '<div>',
       '  <a',
-      '    href="www.testme.com"',
+      '    href="https://www.testme.com?q=test"',
       '    style="white-space: pre-wrap"',
-      '  >White Space\nShould not ident\nIn case of user data</a>',
+      '  >White Space&#10;Should not ident&#10;In case of user data</a>',
       '</div>'
-    ]))
+    ].join("\n"))
     assert.equal(form({
       class: ['row', 'g-3']
     }, [
@@ -263,7 +274,7 @@ QUnit.test("dom", assert => {
           text('Sign in')
         ])
       ])
-    ]).outerHTML, render([
+    ]), [
       '<form class="row g-3">',
       '  <div class="col-md-6">',
       '    <label for="inputEmail4" class="form-label">Email</label>',
@@ -324,7 +335,7 @@ QUnit.test("dom", assert => {
       '    <button type="submit" class="btn btn-primary">Sign in</button>',
       '  </div>',
       '</form>'
-    ]))
+    ].join("\n"))
 
     const sup = (attrs, html) => div({
       class: 'super'
@@ -335,11 +346,11 @@ QUnit.test("dom", assert => {
       href: 'www.testme.com'
     }, [
       text('testme!')
-    ]).outerHTML, render([
+    ]), [
       '<div class="super">',
       '  <a href="www.testme.com">testme!</a>',
       '</div>'
-    ]))
+    ].join("\n"))
 
     const hyper = (attrs, html) => div({
       class: 'hyper'
@@ -350,13 +361,13 @@ QUnit.test("dom", assert => {
       href: 'www.testme.com'
     }, [
       text('testme!')
-    ]).outerHTML, render([
+    ]), [
       '<div class="hyper">',
       '  <div class="super">',
       '    <a href="www.testme.com">testme!</a>',
       '  </div>',
       '</div>'
-    ]))
+    ].join("\n"))
 
     const deep = (attrs, html) => {
       if (attrs.n) {
@@ -370,7 +381,7 @@ QUnit.test("dom", assert => {
       n: 5
     }, [
       text('Hello')
-    ]).outerHTML, render([
+    ]), [
       '<div>',
       '  <div>',
       '    <div>',
@@ -382,70 +393,42 @@ QUnit.test("dom", assert => {
       '    </div>',
       '  </div>',
       '</div>'
-    ]))
-
-    assert.equal(window.TEST_CLICK, null)
-    const e = button({
-      type: 'button',
-      click: (e, index) => {
-        e.textContent = 'call e'+index
-        window.TEST_CLICK = 1
-      }
-    }, [
-      text('Test me!')
-    ])
-    const f = button({
-      type: 'button',
-      onclick: ev => {
-        ev.target.textContent = 'call F'
-        window.TEST_CLICK++
-      }
-    }, [
-      text('Test me again!')
-    ])
-    assert.equal(e.outerHTML, '<button type="button">Test me!</button>')
-    assert.equal(f.outerHTML, '<button type="button">Test me again!</button>')
-    assert.equal(e.textContent, 'Test me!')
-    assert.equal(f.textContent, 'Test me again!')
-    e.click(1)
-    assert.equal(e.textContent, 'call e1')
-    assert.equal(f.textContent, 'Test me again!')
-    assert.equal(window.TEST_CLICK, 1)
-    f.click()
-    assert.equal(e.textContent, 'call e1')
-    assert.equal(f.textContent, 'call F')
-    assert.equal(window.TEST_CLICK, 2)
-    f.click()
-    assert.equal(e.textContent, 'call e1')
-    assert.equal(f.textContent, 'call F')
-    assert.equal(window.TEST_CLICK, 3)
-    e.click(2)
-    assert.equal(e.textContent, 'call e2')
-    assert.equal(f.textContent, 'call F')
-    assert.equal(window.TEST_CLICK, 1)
+    ].join("\n"))
 
     assert.equal(div({}, [
       span({}, [
         text("This")
       ]),
-      text("mix"),
+      span({}, [
+        text("mix")
+      ]),
       null,
       span({}, [
         text("Tags")
       ]),
-      text("with"), 
+      span({}, [
+        text("with")
+      ]), 
       span({}, [
         text("array")
       ]),
       null,
-      text("and"),
+      span({}, [
+        text("and")
+      ]),
       span({}, [
         text("text")
       ])
-    ]).outerHTML, render([
+    ]), [
       '<div>',
-      '  <span>This</span>mix<span>Tags</span>with<span>array</span>and<span>text</span>',
+      '  <span>This</span>',
+      '  <span>mix</span>',
+      '  <span>Tags</span>',
+      '  <span>with</span>',
+      '  <span>array</span>',
+      '  <span>and</span>',
+      '  <span>text</span>',
       '</div>'
-    ]))
+    ].join('\n'))
   })
 })

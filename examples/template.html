@@ -19,13 +19,13 @@
       New!
     </button>
     <script type="module">
-      import {template} from "../index.js"
+      import {html} from "../index.js"
 
       window.addTodo = btn => {
         const input = document.body.querySelector('input')
 
         document.body.querySelector('ul')
-          .innerHTML += template(({li, text}) => li({}, [
+          .innerHTML += html(({li, text}) => li({}, [
             text(input.value)
           ]))
         input.value = ""

@@ -1,4 +1,4 @@
-import {template} from '../index.js'
+import {html} from '../index.js'
 
 const input = document.getElementById('input')
 const output = document.getElementById('output')
@@ -21,8 +21,8 @@ const formatter = (H, element) => {
 } 
 
 window.format = () => {
-  const html = document.body.querySelector('textarea').value
-  if (!html) {
+  const data = document.body.querySelector('textarea').value
+  if (!data) {
     window.alert('Fill the text area with HTML.')
     return
   }
@@ -33,15 +33,15 @@ window.format = () => {
   var target
   if (isTemplate) {
     target = document.createElement('div')
-    target.innerHTML = html
+    target.innerHTML = data
   } else {
     const parser = new DOMParser()
-    target = parser.parseFromString(html, "text/html")
+    target = parser.parseFromString(data, "text/html")
   }
 
   input.setAttribute('style', 'display:none')
   output.querySelector('code')
-    .textContent = template(H => formatter(H, target))
+    .textContent = html(H => formatter(H, target))
   output.setAttribute('style', '')
 }
 

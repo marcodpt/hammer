@@ -1,6 +1,6 @@
 import hammer from './src/index.js'
 import debug from './src/target/debug.js'
-import dom from './src/target/dom.js'
-import template from './src/target/template.js'
+import node from './src/target/node.js'
+import html from './src/target/html.js'
 
-export {hammer, debug, dom, template}
+export {hammer, debug, node, html}
