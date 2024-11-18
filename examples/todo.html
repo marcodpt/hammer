@@ -9,6 +9,32 @@
     <title>Todo - Hammer</title>
   </head>
   <body>
-    <script type="module" src="./todo.js"></script>
+    <h1>
+      <a href=".."><img src="../favicon.ico"></a>
+      To do list
+    </h1>
+    <input type="text">
+    <ul></ul>
+    <script type="module">
+      import {dom} from "../index.js"
+
+      document.body.appendChild(dom(({
+        button, li, text
+      }) => 
+        button({
+          onclick: ev => {
+            const input = document.body.querySelector('input')
+            document.body.querySelector('ul').appendChild(
+              li({}, [
+                text(input.value)
+              ])
+            )
+            input.value = ""
+          }
+        }, [
+          text('New!')
+        ])
+      ))
+    </script>
   </body>
 </html>

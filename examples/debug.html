@@ -10,11 +10,11 @@
   </head>
   <body>
     <h1>
-      <img src="../favicon.ico">
+      <a href=".."><img src="../favicon.ico"></a>
       To do list (Debug mode!)
     </h1>
     <input type="text">
-    <pre><code></code></pre>
+    <pre><code style="display: none"></code></pre>
     <button onclick="addTodo(this)">
       New!
     </button>
@@ -24,6 +24,7 @@
       window.addTodo = btn => {
         const input = document.body.querySelector('input')
         const code = document.body.querySelector('code')
+        code.setAttribute('style', '')
 
         code.textContent += (code.textContent ? '\n\n' : '')+
           JSON.stringify(debug(({li, text}) => li({}, [

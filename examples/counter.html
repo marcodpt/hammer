@@ -9,6 +9,34 @@
     <title>Counter - Hammer</title>
   </head>
   <body>
-    <script type="module" src="./counter.js"></script>
+    <h1>
+      <a href=".."><img src="../favicon.ico"></a>
+      Counter: <span>0</span>
+    </h1>
+    <script type="module">
+      import {dom} from "../index.js"
+
+      document.body.appendChild(dom(({button, text}) =>
+        button({
+          onclick: ev => {
+            const el = document.body.querySelector('span')
+            el.textContent = parseInt(el.textContent) - 1
+          }
+        }, [
+          text('-')
+        ])
+      ))
+
+      document.body.appendChild(dom(({button, text}) =>
+        button({
+          onclick: ev => {
+            const el = document.body.querySelector('span')
+            el.textContent = parseInt(el.textContent) + 1
+          }
+        }, [
+          text('+')
+        ])
+      ))
+    </script>
   </body>
 </html>
