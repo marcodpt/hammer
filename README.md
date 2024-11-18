@@ -9,6 +9,12 @@ Hyperscript tools for web craftsmen.
 
 ## ❤️ Features
  - [ES6 module](https://github.com/marcodpt/hammer/blob/main/index.js).
+ - Extremely well
+[tested](https://marcodpt.github.io/hammer/tests/index.html).
+ - Online `HTML` to hyperscript
+[converter](https://marcodpt.github.io/hammer/examples/convert.html).
+ - Online `HTML`
+[formatter](https://marcodpt.github.io/hammer/examples/format.html).
  - Optimized syntax for readability and clarity:
    - All `HTML` tags without introducing global variables.
    - `Attributes` are `objects` and always precede `children`.
@@ -18,27 +24,31 @@ Hyperscript tools for web craftsmen.
 and `style` keys.
    - `Children` are always `arrays` and falsy values are automatically ignored.
  - Flexibility taken to the extreme:
-   - Template engine producing well-formatted HTML. Can be used in any
+   - Template engine producing well-formatted `HTML`. Can be used in any
 JavaScript runtime (
 [NodeJS](https://nodejs.org/en),
 [Deno](https://deno.com/),
 [Bun](https://bun.sh/),
 [txiki.js](https://bettercallsaghul.com/txiki.js/api/index.html)).
-   - DOM Node generation in pure JavaScript, supported in any modern browser.
+   - `DOM` `Node` generation in pure JavaScript,
+supported in any modern browser.
    - Easy integration with any framework using virtual dom:
-     - Example with [hyperapp](https://github.com/jorgebucaran/hyperapp).
-     - Example with [superfine](https://github.com/jorgebucaran/superfine).
+     - Example with
+[hyperapp](https://marcodpt.github.io/hammer/examples/hyperapp.html).
+     - Example with
+[superfine](https://marcodpt.github.io/hammer/examples/superfine.html).
+
+## 💻 Usage
+
+## 📖 API
 
 ## 📢 Motivation
-`Hyperscript` is a fantastic technique for writing `HTML`, using any
-programming language.
-
 The advantages of using `hyperscript` to produce `HTML` elements are many:
 
  - No build steps required.
  - No special text editor support required.
  - No need to learn a new templating language.
-  - Standard debug and error analysis tools work normally.
+ - Standard debug and error analysis tools work normally.
  - It is possible to use well-tested and defined functions to produce `HTML`
 elements.
  - It is possible to combine elements to produce complex applications.
