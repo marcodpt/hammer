@@ -24,14 +24,14 @@ Hyperscript tools for web craftsmen.
 and `style` keys.
    - `Children` are always `arrays` and falsy values are automatically ignored.
  - Flexibility taken to the extreme:
-   - Template engine producing well-formatted `HTML`. Can be used in any
-JavaScript runtime (
+   - [Template engine](https://marcodpt.github.io/hammer/examples/template.html)
+producing well-formatted `HTML`. Can be used in any JavaScript runtime (
 [NodeJS](https://nodejs.org/en),
 [Deno](https://deno.com/),
 [Bun](https://bun.sh/),
 [txiki.js](https://bettercallsaghul.com/txiki.js/api/index.html)).
-   - `DOM` `Node` generation in pure JavaScript,
-supported in any modern browser.
+   - [DOM Node](https://marcodpt.github.io/hammer/examples/todo.html)
+generation in pure JavaScript, supported in any modern browser.
    - Easy integration with any framework using virtual dom:
      - Example with
 [hyperapp](https://marcodpt.github.io/hammer/examples/hyperapp.html).
