@@ -38,6 +38,7 @@ window.format = () => {
     const parser = new DOMParser()
     target = parser.parseFromString(data, "text/html")
   }
+  target = target.firstElementChild || target.firstChild
 
   input.setAttribute('style', 'display:none')
   output.querySelector('code')
